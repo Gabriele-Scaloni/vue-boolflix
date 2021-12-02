@@ -1,18 +1,20 @@
 <template>
 <div id="app">
-  <SearchSection @cambiafilm="filmscelti"/>
+  <MyHeader @cambiafilm="filmscelti"/>
+
+    
 </div>
 
 </template>
 
 <script>
 
-import SearchSection from './components/SearchSection.vue';
+import MyHeader from './components/MyHeader.vue';
 
 export default {
   name: "App",
   components: {
-    SearchSection,
+    MyHeader,
 },
 }
 </script>

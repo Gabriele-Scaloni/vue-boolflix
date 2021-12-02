@@ -1,6 +1,6 @@
 <template>
 <div id="app">
-  <MyHeader @cambiafilm="filmscelti"/>
+  <MyHeader/>
 
     
 </div>

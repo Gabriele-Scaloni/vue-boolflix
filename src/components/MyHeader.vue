@@ -1,12 +1,9 @@
 <template>
-    <div class="container">
-        <form action="">
-            <input type="text" placeholder="search your film"
-            @change="$emit('cambiafilm', filmscelto)"
-            v-model.trim="text">
-            <button @click.prevent="textSearched"> search </button>
-        </form>
-    
+    <div>
+        <div class="container">
+            <SearchSection @cambiafilm="textSearched"/>
+        </div>
+
         <Films v-for="film in filtraFilm"
         :key="film.id"
         :details="film"/>
@@ -15,25 +12,27 @@
 </template>
 
 <script>
-
+ 
 import axios from "axios";
 import Films from '@/components/Films.vue';
+import SearchSection from '@/components/SearchSection.vue';
 
 export default {
-  name: 'SearchSection',
+  name: 'MyHeader',
   components: {
-    Films
+    Films,
+    SearchSection
 },
 data() {
     return {
         apiUrl:"https://api.themoviedb.org/3/movie/550?api_key=5f2a64604e3748200cd6be6490a5e8b8",
         listfilms: [],
-        text:"",
         searchText: "",
+        query : ""  /* &title= ? */
     }
 }, 
     created() {  //hook come mounted ma crea la struttura un pò prima rispetto al mounted
-        this.getFilms
+        this.getFilms();
     },
     methods: {
         getFilms() {
@@ -41,12 +40,12 @@ data() {
             axios
             .get(this.apiUrl)
             .then((result) => {
-                this.listfilms = result.data;
+                this.listfilms = result.data.result;
             }) 
         },
-        textSearched() {
-            this.searchtext = this.text;
-        }
+        /*    textSearched(textWritten) {
+            this.searchtext = textWritten;
+        } */
     },
 
     computed:{

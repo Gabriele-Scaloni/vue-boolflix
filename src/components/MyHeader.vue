@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <SearchSection @cambiafilm="textSearched"/>
+            <SearchSection @cambiafilm="filtraFilm"/>
         </div>
 
         <Films v-for="film in filtraFilm"
@@ -40,7 +40,7 @@ data() {
             axios
             .get(this.apiUrl)
             .then((result) => {
-                this.listfilms = result.data.result;
+                this.listfilms = result.data;
             }) 
         },
         /*    textSearched(textWritten) {
@@ -58,9 +58,7 @@ data() {
             })
         }
     }
-    
 
-    
 }
 </script>
 

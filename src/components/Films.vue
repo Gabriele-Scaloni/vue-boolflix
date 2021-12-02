@@ -1,12 +1,17 @@
 <template>
-  <div class="filmcard">
-    <!-- <img :src="details.poster_path" alt="film" /> -->
-    <h3>Titolo : {{ details.title }}</h3>
-    <p>Titolo originale: {{ details.original_title }}</p>
-    <!-- <p>Lingua originale : {{ details.original_language }}</p> -->
-    <div><span> Lingua :<img class="flag" :src="FlagLanguage()" alt=""></span></div>
-    <p>Voto : {{ details.vote_average }}</p>
-  </div>
+    <div class="container-cards">
+        <div class="film-card">
+            <!-- <img :src="details.poster_path" alt="film" /> -->
+            <h3>Titolo: {{ details.title }}</h3>
+            <p>Titolo originale: {{ details.original_title }}</p>
+            <!-- <p>Lingua originale : {{ details.original_language }}</p> -->
+            <div>
+                <span> Lingua:</span>
+                <img class="flag" :src="FlagLanguage()" alt="">
+            </div>
+            <p>Voto: {{ details.vote_average }}</p>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -29,6 +34,18 @@ export default {
 </script>
 
 <style lang="scss">
+.container-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.film-card {
+    width: 150px;
+    height: 300px;
+
+    background-color: rgb(105, 105, 105);
+    margin: 10px 5px;
+}
 .flag {
     width: 30px;
     height: 20px;

@@ -1,7 +1,7 @@
 <template>
   <div class="container-cards">
     <div class="film-card">
-      <img :src="details.poster_path" alt="film" />
+      <img :src=" `https://image.tmdb.org/t/p/w154$ {{details.poster_path}}` " alt="film" />
       <h3>Titolo: {{ details.title }}</h3>
       <p>Titolo originale: {{ details.original_title }}</p>
       <p>Lingua originale : {{ details.original_language }}</p>
@@ -9,18 +9,30 @@
         <span> Lingua:</span>
         <img class="flag" :src="FlagLanguage()" alt= "" />
       </div>
-      <p>Voto: {{ vote() }} </p>
+      <ul>
+        <li>Voto: {{ vote() }} </li>
+        <li class="star"><i class="fas fa-star" v-if="vote"></i></li>
+        <li class="star"><i class="fas fa-star"></i></li>
+        <li class="star"><i class="fas fa-star"></i></li>
+        <li class="star"><i class="fas fa-star"></i></li>
+        <li class="star"><i class="fas fa-star"></i></li>
+      </ul>
+
     </div>
   </div>
 </template>
-
 <script>
+/* font awesome, prima si installa nel terminale e poi si importa,
+ controllare versione nel json, come axios in App.vue */
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/js/all.js'
+
 export default {
   name: "Films",
   props: {
     details: Object,
   },
-  /* const this.details.original_language = lingua; */
+ 
   methods: {
     FlagLanguage() {
       if (this.details.original_language === "it") {
@@ -32,7 +44,7 @@ export default {
       }
     },
     vote(){ 
-        if ( this.details.vote_average === 0) {
+        if (this.details.vote_average === 0) {
         return 0
       } else if ( this.details.vote_average <= 2 != 0) {
         return 1 
@@ -41,14 +53,17 @@ export default {
       } else if ( this.details.vote_average <= 6) {
         return 3 
       } else if ( this.details.vote_average <= 8) {
-        return 4 
+        return 4
       } else if( this.details.vote_average <= 10) {
-        return 5 
+        return 5
       }
+    },
+    getImg () {
 
     }
+
  },
-};
+}; 
 </script>
 
 <style lang="scss">
@@ -69,5 +84,11 @@ export default {
 .flag {
   width: 30px;
   height: 20px;
+}
+li {
+  display:inline;
+}
+.star {
+  color: gold;
 }
 </style>

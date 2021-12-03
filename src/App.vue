@@ -1,13 +1,17 @@
 <template>
   <div id="app">
     <MyHeader @search="handleSearch" />
-    <Films v-for="film in listfilms"
+    <main>
+      <Films v-for="film in listfilms"
         :key="film.id"
-        :details="film"/>
+        :details="film"
+      />
 
-    <Series v-for="serie in listseries"
-    :key="serie.id"
-    :particolari="serie"/>
+      <Series v-for="serie in listseries"
+        :key="serie.id"
+        :particolari="serie"
+      />
+    </main>
   </div>
 </template>
 
@@ -40,14 +44,14 @@ export default {
       this.getSeries();
     },
     getFilms() {
-      /* chiamo axios qui con il get chiamo l'api e poi con il then  che mi fa tornare l'oggetto*/
+      /* chiamo axios qui con il get chiamo l'api e poi con il then  che mi fa tornare l'oggetto e aggiungo all'API searchText*/
       axios.get(this.apiUrlFilms+this.searchText).then((result) => {
         this.listfilms = result.data.results;
       });
     },
-    getSeries() {//aggiungo all'API searchText
+    getSeries() {// chiamo axios qui con il get chiamo l'api e poi con il then  che mi fa tornare l'oggetto e aggiungo all'API searchText
       axios.get(this.apiUrlSeries+this.searchText).then((result) => {
-        this.listSeries = result.data.results;
+        this.listseries = result.data.results;
       });
     },
   
@@ -56,6 +60,16 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+main {
+  width: 100%;
+  height: auto;
+  background-color: rgb(43, 43, 43);
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

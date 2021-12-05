@@ -7,9 +7,9 @@
         :details="film"
       />
 
-      <Series v-for="serie in listseries"
+      <Films v-for="serie in listseries"
         :key="serie.id"
-        :particolari="serie"
+        :details="serie"
       />
     </main>
   </div>
@@ -19,14 +19,14 @@
 import axios from "axios";
 import MyHeader from "./components/MyHeader.vue";
 import Films from '@/components/Films.vue';
-import Series from '@/components/Series.vue';
+// import Series from '@/components/Series.vue';
 
 export default {
   name: "App",
   components: {
     MyHeader,
     Films,
-    Series,
+    // Series,
   },
   data() {
     return {

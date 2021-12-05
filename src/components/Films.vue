@@ -1,21 +1,18 @@
 <template>
   <div class="container-cards">
     <div class="film-card">
-      <img :src=" `https://image.tmdb.org/t/p/w154$ {{details.poster_path}}` " alt="film" />
+      <img :src=" `https://image.tmdb.org/t/p/w154${poster_path}` " alt="film" />
       <h3>Titolo: {{ details.title }}</h3>
-      <p>Titolo originale: {{ details.original_title }}</p>
+      <p>Titolo originale: {{ details.original_title || details.original_name }}</p>
       <p>Lingua originale : {{ details.original_language }}</p>
       <div>
         <span> Lingua:</span>
         <img class="flag" :src="FlagLanguage()" alt= "" />
       </div>
       <ul>
-        <li>Voto: {{ vote() }} </li>
-        <li class="star"><i class="fas fa-star" v-if="vote"></i></li>
-        <li class="star"><i class="fas fa-star"></i></li>
-        <li class="star"><i class="fas fa-star"></i></li>
-        <li class="star"><i class="fas fa-star"></i></li>
-        <li class="star"><i class="fas fa-star"></i></li>
+        <li v-for="index in 5" :key="index" class="star" :class="star(index, vote())">
+          <i class="fas fa-star"></i>
+          </li>
       </ul>
 
     </div>
@@ -32,7 +29,8 @@ export default {
   props: {
     details: Object,
   },
- 
+
+
   methods: {
     FlagLanguage() {
       if (this.details.original_language === "it") {
@@ -43,25 +41,15 @@ export default {
         return "https://www.prestashop.com/sites/default/files/styles/blog_750x320/public/blog/2019/10/banner_error_404.jpg?itok=eAS4swln"
       }
     },
-    vote(){ 
-        if (this.details.vote_average === 0) {
-        return 0
-      } else if ( this.details.vote_average <= 2 != 0) {
-        return 1 
-      } else if ( this.details.vote_average <= 4) {
-        return 2 
-      } else if ( this.details.vote_average <= 6) {
-        return 3 
-      } else if ( this.details.vote_average <= 8) {
-        return 4
-      } else if( this.details.vote_average <= 10) {
-        return 5
+    star(index, val) {
+
+      if (index <= val) {
+        return "active";
       }
     },
-    getImg () {
-
-    }
-
+    vote(){ 
+        return Math.round(this.details.vote_average / 2);
+    },
  },
 }; 
 </script>
@@ -88,7 +76,8 @@ export default {
 li {
   display:inline;
 }
-.star {
+.active{ 
   color: gold;
 }
+
 </style>
